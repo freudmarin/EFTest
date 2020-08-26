@@ -1,0 +1,115 @@
+﻿@model List<EFDbFirstApproachExample.Models.Category2>
+
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_LayoutPage1.cshtml";
+}
+
+<h2>Categories</h2>
+
+<a href="/categories/create">Create</a>
+<form class="form-inline" action="/categories/index">
+    <label for="search" class="mr-1">Search:</label>
+    <input type="search" class="form-control mr-1" id="search" name="search" placeholder="Search" value="@ViewBag.search">
+    <button type="submit" class="btn btn-primary">Go</button>
+</form>
+
+<table class="table">
+    <tr class="table-secondary">
+        
+        <th style="width:10%">
+            @if (ViewBag.IconClass == "fa-sort-desc")
+            {
+                <a href="/categories/index?SortColumn=CategoryID&IconClass=fa-sort-asc&PageNo=1">Category ID</a>
+                if (ViewBag.SortColumn == "CategoryID")
+                {
+                    <i class="fa @ViewBag.IconClass"></i>
+                }
+            }
+            else
+            {
+                <a href="/categories/index?SortColumn=CategoryID&IconClass=fa-sort-desc&PageNo=1">Category ID</a>
+                if (ViewBag.SortColumn == "CategoryID")
+                {
+                    <i class="fa @ViewBag.IconClass"></i>
+                }
+            }
+        </th>
+        <th style="width:20%">
+            @if (ViewBag.IconClass == "fa-sort-desc")
+            {
+                <a href="/categories/index?SortColumn=CategoryName&IconClass=fa-sort-asc&PageNo=1">Category Name</a>
+                if (ViewBag.SortColumn == "CategoryName")
+                {
+                    <i class="fa @ViewBag.IconClass"></i>
+                }
+            }
+            else
+            {
+                <a href="/categories/index?SortColumn=CategoryName&IconClass=fa-sort-desc&PageNo=1">Category Name</a>
+                if (ViewBag.SortColumn == "CategoryName")
+                {
+                    <i class="fa @ViewBag.IconClass"></i>
+                }
+            }
+        </th>
+       
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+            <td>@item.CategoryID</td>
+            <td>@item.CategoryName</td>
+        
+            <td>
+                <a href="/categories/details/@item.CategoryID">Details</a> |
+                <a href="/categories/edit/@item.CategoryID">Edit</a> |
+                <a href="/categories/delete/@item.CategoryID">Delete</a> |
+            </td>
+        </tr>
+    }
+
+    <tr>
+        <td colspan="9">
+            <!--shiriti i faqes paging-->
+            @{
+                int PrevPageNo = ViewBag.PageNo - 1;
+                if (PrevPageNo <= 0)
+                {
+                    PrevPageNo = 1;
+                }
+
+                int NextPageNo = ViewBag.PageNo + 1;
+                if (NextPageNo > ViewBag.NoOfPages)
+                {
+                    NextPageNo = ViewBag.NoOfPages;
+                }
+            }
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="/categories/index?SortColumn=@ViewBag.SortColumn&IconClass=@ViewBag.IconClass&PageNo=@PrevPageNo">Prev</a>
+                </li>
+                @for (int i = 0; i < ViewBag.NoOfPages; i++)
+                {
+                    if ((i + 1) == ViewBag.PageNo)
+                    {
+                        <li class="page-item active">
+                            <a class="page-link" href="/categories/index?SortColumn=@ViewBag.SortColumn&IconClass=@ViewBag.IconClass&PageNo=@(i + 1)">@(i + 1)</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="/categories/index?SortColumn=@ViewBag.SortColumn&IconClass=@ViewBag.IconClass&PageNo=@(i + 1)">@(i + 1)</a>
+                        </li>
+                    }
+                }
+                <li class="page-item">
+                    <a class="page-link" href="/categories/index?SortColumn=@ViewBag.SortColumn&IconClass=@ViewBag.IconClass&PageNo=@NextPageNo">Next</a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
