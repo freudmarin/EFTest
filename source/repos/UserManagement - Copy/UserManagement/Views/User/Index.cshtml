@@ -1,0 +1,92 @@
+﻿@model IEnumerable<UserManagement.Identity.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AddUser")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.PasswordHash)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.UserName)
+        </th>
+
+
+        <th>
+            Update
+        </th>
+        <th>
+            Details
+        </th>
+
+
+        <th>
+            Delete
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.PasswordHash)
+        </td>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.UserName)
+        </td>
+        <td>
+           
+            
+            
+            <a class="btn btn-sm btn-success" href="/User/Edit/@item.Id">
+                Update
+            </a>
+</td>
+        <td>
+            <a class="btn btn-sm btn-primary" href="/User/Details/@item.Id">
+                Details
+            </a>
+            </td>
+        
+            
+            <td>
+                <a class="btn btn-sm btn-danger" href="/User/Delete/@item.Id">
+                    Delete
+                </a>
+           
+        </td>
+    </tr>
+}
+
+</table>
