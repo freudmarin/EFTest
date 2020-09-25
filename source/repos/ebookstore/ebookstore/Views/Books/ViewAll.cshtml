@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Books>
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<table class="table table-bordered table-striped table-condensed">
+    <thead>
+        <tr>
+            <th>Titulli</th>
+            <th>Pershkrimi</th>
+            <th>Autori</th>
+            <th>Kategoria</th>
+            <th>Cmimi</th>
+            <th>
+                <a onclick="showInPopUp('@Url.Action("AddOrEdit","Books",null,Context.Request.Scheme) ', 'Shto/Modifiko Liber')"
+                   id="createBookModal" class="btn btn-primary" data-toggle="modal" data-target="#modal-action-book">
+                    <i class="glyphicon glyphicon-plus"></i>         Shto liber
+
+                </a>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+       
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td>@Html.DisplayFor(modelItem => item.Author)</td>
+            <td>@Html.DisplayFor(modelItem => item.Category.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+     
+            <td>
+
+                <a onclick="showInPopUp('@Url.Action("AddOrEdit", "Books", new { Id = item.Id }, Context.Request.Scheme)' , 'Shto/Modifiko Liber')"
+                   class="btn btn-primary">
+                    <i class="glyphicon glyphicon-plus"></i>        Modifiko
+
+                </a>
+            </td>
+            <!--   <a id="deleteBookModal" data-toggle="modal" asp-action="Delete" onsubmit="return // Write your JavaScript code.
+    jQueryAjaxDelete(this);" asp-route-id="@item.Id" data-target="#modal-action-book" data-backdrop="false" class="btn btn-danger">
+                        <i class="glyphicon glyphicon-trash"></i>  Fshi
+
+                     </a>-->
+            <td>
+                <a>
+                    <form asp-action="Delete" asp-route-id="@item.Id" onsubmit="return jQueryAjaxDelete(this)">
+                        <input type="submit" value="Fshi" class="btn btn-danger" />
+                    </form>
+                </a>
+
+            </td>
+        </tr>
+
+        
+        }
+    </tbody>
+</table>

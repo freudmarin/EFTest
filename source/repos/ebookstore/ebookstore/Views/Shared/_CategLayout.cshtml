@@ -1,0 +1,58 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container"  style="margin-top:50px;" >
+    <div class="row" >
+       <!-- <div class="col-md-6 col-md-offset-3">-->
+            <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="row">
+                     
+                        
+                            <div class="col-xs-6">
+
+                                <a href="/Categories/Index" class="active" id="login-form-link">Kategorite</a>
+                            </div>
+                        
+                        
+                      
+                            <div class="col-xs-6">
+                            <a href="/Categories/AddOrEdit" id="register-form-link">Shto/Modifiko Kategori</a>
+                        </div>
+                        
+                    </div>
+                   
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section Scripts
+{
+
+    <script>
+                $(function () {
+                    var current = location.pathname;
+                    $('.nav-tabs li a').each(function () {
+                        var $this = $(this);
+                        if (current.indexOf($this.attr('href')) !== -1) {
+                            $this.addClass('active');
+                        }
+                    })
+                }
+    </script>
+    @RenderSection("Scripts", required: false)
+}
+
+
+

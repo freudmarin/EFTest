@@ -1,0 +1,35 @@
+﻿@model Books
+<style>
+img {
+    float:left;
+    width:  265px;
+    height: 300px;
+   
+}
+</style>
+<div  style="position:relative;display:block;" class="col-sm-3 col-lg-3 col-md-3">
+
+    <img src="/images/@Model.image">
+    <div class="caption">
+
+        
+         
+        
+        <h3>   <a asp-controller="Books" asp-action="DisplayDetails" asp-route-id="@Model.Id">@Model.Name</a> </h3>
+        
+
+        <h5><b>Kategoria: @Model.Category.Name</b></h5>
+        <p>@Model.Description</p>
+        <div class="product-carousel-price">
+            <h3>   @Model.Price.ToString("c")</h3>
+        </div>
+        <div class="product-option-shop">
+            <a class="add_to_cart_button" data-quantity="1"  data-product_id="70" rel="nofollow" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+            asp-route-bookId="@Model.Id">Shto ne shporte</a>
+        </div>
+
+    </div>
+</div>
+
+
+

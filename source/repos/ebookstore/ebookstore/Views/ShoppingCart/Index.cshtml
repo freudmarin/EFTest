@@ -1,0 +1,63 @@
+﻿@model ebookstore.Models.ShoppingCartViewModel
+
+@{
+    var pageName = "Shporta e Blerjeve";
+    ViewData["Title"] = pageName;
+}
+
+<h2>@pageName</h2>
+
+
+            <form method="post" action="#">
+                <table cellspacing="0" class="shop_table cart">
+                    <thead>
+                        <tr>
+                            <th class="product-quantity">Sasia</th>
+                            <th class="product-name">Produkti</th>
+                            <th class="product-price">Cmimi</th>
+
+                            <th class="product-subtotal">Nentotali</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+                        {
+                            <tr class="cart_item">
+                                <td class="text-center">
+                                    <a class="btn btn-default" asp-action="RemoveFromShoppingCart"
+                                       asp-route-bookId="@line.Book.Id">
+                                        <b>-</b>
+                                    </a>          <b>@line.Amount</b>          <a class="btn btn-default" asp-action="AddToShoppingCart" asp-route-bookId="@line.Book.Id"><b>+</b></a>
+                                </td>
+
+                                <td class="product-name">@line.Book.Name</td>
+
+                                <td class="product-price">@line.Book.Price.ToString("c")</td>
+
+                                <td class="product-subtotal">
+                                    @((line.Amount * line.Book.Price).ToString("c"))
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right">Totali:</td>
+                            <td class="text-right">
+                                @Model.ShoppingCartTotal.ToString("C")
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <div >
+                    @if (Model.ShoppingCartTotal > 0)
+                    {
+                        <a asp-controller="Orders" asp-action="Checkout" class="btn btn-primary" style="float:right;">Checkout </a>
+                    }
+                </div>
+                <div >
+                    <a asp-controller="ShoppingCart" asp-action="ClearCart" class="btn btn-danger" style="float-left;">Boshatis shporten</a>
+                </div>
+
+            </form>

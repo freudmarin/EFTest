@@ -1,0 +1,58 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNet.Identity
+@model ebookstore.Models.AccountViewModel.LoginViewModel
+@inject SignInManager<ebookstoreUser> SignInManager
+    <!---Dependeny Injection-->
+@{
+    ViewData["Title"] = "Log in";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+
+    <div class="col-md-10 offset-md-1 ">
+
+
+   
+            <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+
+
+                <div class="form-group ">
+                    <label asp-for="Username"></label>
+                    <input asp-for="Username" class="form-control " />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="form-group  ">
+                    <label asp-for="Password"></label>
+                    <input  asp-for="Password" class="form-control " />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block">Log in</button>
+                </div>
+
+                <div class="form-group ">
+
+                    <p>
+                        <a asp-action="Register" asp-controller="Account">Register as a new user</a>
+                    </p>
+                </div>
+                <div class="validation-summary-errors" data-valmsg-summary="true">
+                </div>
+            </form>
+        
+    </div>
+
+
+<div class="col-md-6 col-md-offset-2">
+
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
